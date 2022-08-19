@@ -96,12 +96,30 @@ class LoginViewController: UIViewController {
 
     // MARK: - Stack Outlets
 
+    private lazy var loginTextFieldStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.distribution = .fill
+        stackView.alignment = .fill
+        stackView.spacing = 20
+        return stackView
+    }()
+
+    private lazy var loginButtonStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.distribution = .fill
+        stackView.alignment = .fill
+        stackView.spacing = 10
+        return stackView
+    }()
+
     private lazy var loginStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.distribution = .fill
         stackView.alignment = .fill
-        stackView.spacing = 25
+        stackView.spacing = 60
         return stackView
     }()
 
@@ -118,12 +136,18 @@ class LoginViewController: UIViewController {
     private func setupHierarchy() {
         view.addSubview(backgroundImageView)
         view.addSubview(loginLabel)
+        view.addSubview(loginTextFieldStackView)
+        view.addSubview(loginButtonStackView)
         view.addSubview(loginStackView)
 
-        loginStackView.addArrangedSubview(loginTextField)
-        loginStackView.addArrangedSubview(passwordTextField)
-        loginStackView.addArrangedSubview(loginButton)
-        loginStackView.addArrangedSubview(forgotPasswordButton)
+        loginTextFieldStackView.addArrangedSubview(loginTextField)
+        loginTextFieldStackView.addArrangedSubview(passwordTextField)
+
+        loginButtonStackView.addArrangedSubview(loginButton)
+        loginButtonStackView.addArrangedSubview(forgotPasswordButton)
+
+        loginStackView.addArrangedSubview(loginTextFieldStackView)
+        loginStackView.addArrangedSubview(loginButtonStackView)
 
 
     }
