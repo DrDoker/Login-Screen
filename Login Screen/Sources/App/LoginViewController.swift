@@ -19,7 +19,6 @@ class LoginViewController: UIViewController {
         button.clipsToBounds = true
         button.layer.cornerRadius = 20
         button.backgroundColor = UIColor(named: "loginButtonColor")
-        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
 
@@ -32,13 +31,21 @@ class LoginViewController: UIViewController {
 
     private lazy var facebookButton: UIButton = {
         let button = UIButton(type: .system)
-
+        button.setTitle("Facebook", for: .normal)
+        button.setTitleColor(UIColor.white, for: .normal)
+        button.clipsToBounds = true
+        button.layer.cornerRadius = 20
+        button.backgroundColor = UIColor(named: "loginButtonColor")
         return button
     }()
 
     private lazy var twitterButton: UIButton = {
         let button = UIButton(type: .system)
-
+        button.setTitle("Twitter", for: .normal)
+        button.setTitleColor(UIColor.white, for: .normal)
+        button.clipsToBounds = true
+        button.layer.cornerRadius = 20
+        button.backgroundColor = UIColor(named: "loginButtonColor")
         return button
     }()
 
@@ -62,13 +69,19 @@ class LoginViewController: UIViewController {
 
     private lazy var connectLabel: UILabel = {
         let label = UILabel()
-
+        label.text = "or connect with"
+        label.textAlignment = .center
+        label.font = .systemFont(ofSize: 45, weight: .thin)
+        label.textColor = .white
         return label
     }()
 
-    private lazy var accountLabel: UILabel = {
+    private lazy var dontAccountLabel: UILabel = {
         let label = UILabel()
-
+        label.text = "Don`t have account?"
+        label.textAlignment = .center
+        label.font = .systemFont(ofSize: 15, weight: .thin)
+        label.textColor = .white
         return label
     }()
 
@@ -148,6 +161,15 @@ class LoginViewController: UIViewController {
         return stackView
     }()
 
+    private lazy var singUpStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.distribution = .fill
+        stackView.alignment = .fill
+        stackView.spacing = 20
+        return stackView
+    }()
+
     // MARK: - Lifecycle
 
     override func viewDidLoad() {
@@ -164,6 +186,7 @@ class LoginViewController: UIViewController {
         view.addSubview(loginTextFieldStackView)
         view.addSubview(loginButtonStackView)
         view.addSubview(loginStackView)
+        view.addSubview(singUpStackView)
 
         loginTextFieldStackView.addArrangedSubview(loginTextField)
         loginTextFieldStackView.addArrangedSubview(passwordTextField)
@@ -171,6 +194,9 @@ class LoginViewController: UIViewController {
         loginButtonStackView.addArrangedSubview(forgotPasswordButton)
         loginStackView.addArrangedSubview(loginTextFieldStackView)
         loginStackView.addArrangedSubview(loginButtonStackView)
+
+        singUpStackView.addArrangedSubview(dontAccountLabel)
+        singUpStackView.addArrangedSubview(singUpButton)
     }
 
     private func setupLayout() {
@@ -202,6 +228,11 @@ class LoginViewController: UIViewController {
             make.centerY.equalTo(view).offset(-60)
             make.left.equalTo(view).offset(45)
             make.right.equalTo(view).inset(45)
+        }
+
+        singUpStackView.snp.makeConstraints { make in
+            make.centerX.equalTo(view)
+            make.bottom.equalTo(view).offset(-22)
         }
     }
 
