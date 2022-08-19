@@ -14,36 +14,37 @@ class LoginViewController: UIViewController {
 
     private lazy var loginButton: UIButton = {
         let button = UIButton(type: .system)
-
+        button.setTitle("Login", for: .normal)
+        button.setTitleColor(UIColor.white, for: .normal)
+        button.clipsToBounds = true
+        button.layer.cornerRadius = 20
+        button.backgroundColor = UIColor(named: "loginButtonColor")
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
 
     private lazy var forgotPasswordButton: UIButton = {
         let button = UIButton(type: .system)
-
-        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Forgot your password?", for: .normal)
+        button.setTitleColor(UIColor.white, for: .normal)
         return button
     }()
 
     private lazy var facebookButton: UIButton = {
         let button = UIButton(type: .system)
 
-        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
 
     private lazy var twitterButton: UIButton = {
         let button = UIButton(type: .system)
 
-        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
 
     private lazy var singUpButton: UIButton = {
         let button = UIButton(type: .system)
 
-        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
 
@@ -51,11 +52,10 @@ class LoginViewController: UIViewController {
 
     private lazy var loginLabel: UILabel = {
         let label = UILabel()
-        label.text = ""
+        label.text = "Login"
         label.textAlignment = .center
-        label.font = .systemFont(ofSize: 100, weight: .thin)
+        label.font = .systemFont(ofSize: 45, weight: .thin)
         label.textColor = .white
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
 
@@ -63,15 +63,25 @@ class LoginViewController: UIViewController {
 
     private lazy var loginTextField: UITextField = {
         let textField = UITextField()
-
-        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.backgroundColor = .white
+        textField.layer.cornerRadius = 20
+        textField.placeholder = "Enter text here"
+        textField.returnKeyType = UIReturnKeyType.done
+        textField.autocorrectionType = UITextAutocorrectionType.no
+        textField.clearButtonMode = UITextField.ViewMode.whileEditing;
+        textField.textAlignment = .center
         return textField
     }()
 
     private lazy var passwordTextField: UITextField = {
         let textField = UITextField()
-
-        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.backgroundColor = .white
+        textField.layer.cornerRadius = 20
+        textField.placeholder = "Enter text here"
+        textField.returnKeyType = UIReturnKeyType.done
+        textField.autocorrectionType = UITextAutocorrectionType.no
+        textField.clearButtonMode = UITextField.ViewMode.whileEditing;
+        textField.textAlignment = .center
         return textField
     }()
 
@@ -81,8 +91,18 @@ class LoginViewController: UIViewController {
         let imageView = UIImageView(frame: .zero)
         imageView.image = UIImage(named: "backgroundImage")
         imageView.contentMode = .scaleToFill
-        imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
+    }()
+
+    // MARK: - Stack Outlets
+
+    private lazy var loginStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.distribution = .fill
+        stackView.alignment = .fill
+        stackView.spacing = 25
+        return stackView
     }()
 
     // MARK: - Lifecycle
@@ -97,6 +117,14 @@ class LoginViewController: UIViewController {
 
     private func setupHierarchy() {
         view.addSubview(backgroundImageView)
+        view.addSubview(loginLabel)
+        view.addSubview(loginStackView)
+
+        loginStackView.addArrangedSubview(loginTextField)
+        loginStackView.addArrangedSubview(passwordTextField)
+        loginStackView.addArrangedSubview(loginButton)
+        loginStackView.addArrangedSubview(forgotPasswordButton)
+
 
     }
 
@@ -106,6 +134,29 @@ class LoginViewController: UIViewController {
             make.top.equalTo(view)
             make.left.equalTo(view)
             make.right.equalTo(view)
+        }
+
+        loginLabel.snp.makeConstraints { make in
+            make.centerX.equalTo(view)
+            make.bottom.equalTo(loginStackView.snp.top).offset(-60)
+        }
+
+        loginTextField.snp.makeConstraints { make in
+            make.height.equalTo(45)
+        }
+
+        passwordTextField.snp.makeConstraints { make in
+            make.height.equalTo(45)
+        }
+
+        loginButton.snp.makeConstraints { make in
+            make.height.equalTo(45)
+        }
+
+        loginStackView.snp.makeConstraints { make in
+            make.centerY.equalTo(view).offset(-60)
+            make.left.equalTo(view).offset(45)
+            make.right.equalTo(view).inset(45)
         }
     }
 
