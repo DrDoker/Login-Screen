@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class LoginViewController: UIViewController {
 
@@ -78,7 +79,9 @@ class LoginViewController: UIViewController {
 
     private lazy var backgroundImageView: UIImageView = {
         let imageView = UIImageView(frame: .zero)
-
+        imageView.image = UIImage(named: "backgroundImage")
+        imageView.contentMode = .scaleToFill
+        imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
 
@@ -98,7 +101,12 @@ class LoginViewController: UIViewController {
     }
 
     private func setupLayout() {
-
+        backgroundImageView.snp.makeConstraints { make in
+            make.bottom.equalTo(view)
+            make.top.equalTo(view)
+            make.left.equalTo(view)
+            make.right.equalTo(view)
+        }
     }
 
     // MARK: - Actions
