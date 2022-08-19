@@ -44,7 +44,8 @@ class LoginViewController: UIViewController {
 
     private lazy var singUpButton: UIButton = {
         let button = UIButton(type: .system)
-
+        button.setTitle("Sign up", for: .normal)
+        button.setTitleColor(UIColor.white, for: .normal)
         return button
     }()
 
@@ -52,10 +53,22 @@ class LoginViewController: UIViewController {
 
     private lazy var loginLabel: UILabel = {
         let label = UILabel()
-        label.text = "Login"
+        label.text = "Welcome"
         label.textAlignment = .center
         label.font = .systemFont(ofSize: 45, weight: .thin)
         label.textColor = .white
+        return label
+    }()
+
+    private lazy var connectLabel: UILabel = {
+        let label = UILabel()
+
+        return label
+    }()
+
+    private lazy var accountLabel: UILabel = {
+        let label = UILabel()
+
         return label
     }()
 
@@ -65,11 +78,13 @@ class LoginViewController: UIViewController {
         let textField = UITextField()
         textField.backgroundColor = .white
         textField.layer.cornerRadius = 20
-        textField.placeholder = "Enter text here"
+        textField.placeholder = "Enter login"
         textField.returnKeyType = UIReturnKeyType.done
         textField.autocorrectionType = UITextAutocorrectionType.no
         textField.clearButtonMode = UITextField.ViewMode.whileEditing;
         textField.textAlignment = .center
+        textField.setLeftIcon(UIImage(systemName: "person"))
+        textField.tintColor = .systemGray
         return textField
     }()
 
@@ -77,11 +92,14 @@ class LoginViewController: UIViewController {
         let textField = UITextField()
         textField.backgroundColor = .white
         textField.layer.cornerRadius = 20
-        textField.placeholder = "Enter text here"
+        textField.placeholder = "Enter password"
         textField.returnKeyType = UIReturnKeyType.done
         textField.autocorrectionType = UITextAutocorrectionType.no
         textField.clearButtonMode = UITextField.ViewMode.whileEditing;
         textField.textAlignment = .center
+        textField.setLeftIcon(UIImage(systemName: "lock"))
+        textField.tintColor = .systemGray
+        textField.isSecureTextEntry = true
         return textField
     }()
 
@@ -120,6 +138,13 @@ class LoginViewController: UIViewController {
         stackView.distribution = .fill
         stackView.alignment = .fill
         stackView.spacing = 60
+
+        stackView.layer.shadowColor = UIColor(named: "shadowColor")?.cgColor
+        stackView.layer.shadowOpacity = 0.7
+        stackView.layer.shadowOffset = .zero
+        stackView.layer.shadowRadius = 50
+        stackView.layer.shouldRasterize = true
+        stackView.layer.rasterizationScale = UIScreen.main.scale
         return stackView
     }()
 
@@ -142,14 +167,10 @@ class LoginViewController: UIViewController {
 
         loginTextFieldStackView.addArrangedSubview(loginTextField)
         loginTextFieldStackView.addArrangedSubview(passwordTextField)
-
         loginButtonStackView.addArrangedSubview(loginButton)
         loginButtonStackView.addArrangedSubview(forgotPasswordButton)
-
         loginStackView.addArrangedSubview(loginTextFieldStackView)
         loginStackView.addArrangedSubview(loginButtonStackView)
-
-
     }
 
     private func setupLayout() {
@@ -162,7 +183,7 @@ class LoginViewController: UIViewController {
 
         loginLabel.snp.makeConstraints { make in
             make.centerX.equalTo(view)
-            make.bottom.equalTo(loginStackView.snp.top).offset(-60)
+            make.bottom.equalTo(loginStackView.snp.top).offset(-55)
         }
 
         loginTextField.snp.makeConstraints { make in
@@ -186,7 +207,17 @@ class LoginViewController: UIViewController {
 
     // MARK: - Actions
 
-    // MARK: - Other
+}
 
+// MARK: - Extension
 
+extension UITextField {
+    func setLeftIcon(_ image: UIImage?) {
+        let iconView = UIImageView(frame: CGRect(x: 40, y: 5, width: 20, height: 20))
+        iconView.image = image
+        let iconContainerView: UIView = UIView(frame: CGRect(x: 50, y: 0, width: 30, height: 30))
+        iconContainerView.addSubview(iconView)
+        leftView = iconContainerView
+        leftViewMode = .always
+    }
 }
