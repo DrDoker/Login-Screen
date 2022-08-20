@@ -35,7 +35,7 @@ class LoginViewController: UIViewController {
         button.setTitleColor(UIColor.white, for: .normal)
         button.clipsToBounds = true
         button.layer.cornerRadius = 20
-        button.backgroundColor = UIColor(named: "loginButtonColor")
+        button.backgroundColor = UIColor(named: "facebookButtonColor")
         return button
     }()
 
@@ -45,7 +45,7 @@ class LoginViewController: UIViewController {
         button.setTitleColor(UIColor.white, for: .normal)
         button.clipsToBounds = true
         button.layer.cornerRadius = 20
-        button.backgroundColor = UIColor(named: "loginButtonColor")
+        button.backgroundColor = UIColor(named: "twitterButtonColor")
         return button
     }()
 
@@ -71,7 +71,7 @@ class LoginViewController: UIViewController {
         let label = UILabel()
         label.text = "or connect with"
         label.textAlignment = .center
-        label.font = .systemFont(ofSize: 45, weight: .thin)
+        label.font = .systemFont(ofSize: 15, weight: .thin)
         label.textColor = .white
         return label
     }()
@@ -125,6 +125,16 @@ class LoginViewController: UIViewController {
         return imageView
     }()
 
+    // MARK: - UIView Outlets
+
+    private lazy var line: UIView = {
+        let view = UIView()
+        view.backgroundColor = .systemGray
+        view.layer.opacity = 0.3
+        view.layer.cornerRadius = 10
+        return view
+    }()
+
     // MARK: - Stack Outlets
 
     private lazy var loginTextFieldStackView: UIStackView = {
@@ -161,14 +171,30 @@ class LoginViewController: UIViewController {
         return stackView
     }()
 
+    private lazy var socialMediaStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.distribution = .fillEqually
+        stackView.spacing = 15
+
+        stackView.layer.shadowColor = UIColor(named: "shadowColor")?.cgColor
+        stackView.layer.shadowOpacity = 0.9
+        stackView.layer.shadowOffset = .zero
+        stackView.layer.shadowRadius = 40
+        stackView.layer.shouldRasterize = true
+        stackView.layer.rasterizationScale = UIScreen.main.scale
+        return stackView
+    }()
+
     private lazy var singUpStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.distribution = .fill
-        stackView.alignment = .fill
+        stackView.distribution = .fillProportionally
+        stackView.alignment = .center
         stackView.spacing = 20
         return stackView
     }()
+    
 
     // MARK: - Lifecycle
 
@@ -187,6 +213,9 @@ class LoginViewController: UIViewController {
         view.addSubview(loginButtonStackView)
         view.addSubview(loginStackView)
         view.addSubview(singUpStackView)
+        view.addSubview(socialMediaStackView)
+        view.addSubview(line)
+        view.addSubview(connectLabel)
 
         loginTextFieldStackView.addArrangedSubview(loginTextField)
         loginTextFieldStackView.addArrangedSubview(passwordTextField)
@@ -194,6 +223,9 @@ class LoginViewController: UIViewController {
         loginButtonStackView.addArrangedSubview(forgotPasswordButton)
         loginStackView.addArrangedSubview(loginTextFieldStackView)
         loginStackView.addArrangedSubview(loginButtonStackView)
+
+        socialMediaStackView.addArrangedSubview(facebookButton)
+        socialMediaStackView.addArrangedSubview(twitterButton)
 
         singUpStackView.addArrangedSubview(dontAccountLabel)
         singUpStackView.addArrangedSubview(singUpButton)
@@ -212,6 +244,11 @@ class LoginViewController: UIViewController {
             make.bottom.equalTo(loginStackView.snp.top).offset(-55)
         }
 
+        connectLabel.snp.makeConstraints { make in
+            make.centerX.equalTo(view)
+            make.bottom.equalTo(socialMediaStackView.snp.top).offset(-18)
+        }
+
         loginTextField.snp.makeConstraints { make in
             make.height.equalTo(45)
         }
@@ -224,15 +261,36 @@ class LoginViewController: UIViewController {
             make.height.equalTo(45)
         }
 
+        facebookButton.snp.makeConstraints { make in
+            make.height.equalTo(40)
+        }
+
+        twitterButton.snp.makeConstraints { make in
+            make.height.equalTo(40)
+        }
+
         loginStackView.snp.makeConstraints { make in
             make.centerY.equalTo(view).offset(-60)
             make.left.equalTo(view).offset(45)
             make.right.equalTo(view).inset(45)
         }
 
+        socialMediaStackView.snp.makeConstraints { make in
+            make.bottom.equalTo(singUpStackView.snp.top).offset(-50)
+            make.left.equalTo(view).offset(30)
+            make.right.equalTo(view).inset(30)
+        }
+
         singUpStackView.snp.makeConstraints { make in
             make.centerX.equalTo(view)
-            make.bottom.equalTo(view).offset(-22)
+            make.bottom.equalTo(view).offset(-30)
+        }
+
+        line.snp.makeConstraints { make in
+            make.height.equalTo(1)
+            make.left.equalTo(view).offset(30)
+            make.right.equalTo(view).inset(30)
+            make.bottom.equalTo(socialMediaStackView.snp.top).offset(-10)
         }
     }
 
