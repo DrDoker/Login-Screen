@@ -36,6 +36,9 @@ class LoginViewController: UIViewController {
         button.clipsToBounds = true
         button.layer.cornerRadius = 20
         button.backgroundColor = UIColor(named: "facebookButtonColor")
+        button.setImage(UIImage(named: "fbIcon"), for: .normal)
+        button.tintColor = .white
+        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 17, bottom: 0, right: 0)
         return button
     }()
 
@@ -46,6 +49,9 @@ class LoginViewController: UIViewController {
         button.clipsToBounds = true
         button.layer.cornerRadius = 20
         button.backgroundColor = UIColor(named: "twitterButtonColor")
+        button.setImage(UIImage(named: "twitterIcon"), for: .normal)
+        button.tintColor = .white
+        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 17, bottom: 0, right: 0)
         return button
     }()
 
