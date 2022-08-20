@@ -1,0 +1,53 @@
+# General
+
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Thumbnails
+
+._*
+
+## User settings
+
+xcuserdata/
+
+- .xcscmblueprint
+*.xccheckout
+
+## compatibility with Xcode 3 and earlier (ignoring not required starting Xcode 4)
+
+build/
+DerivedData/
+*.moved-aside
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+*.ipa
+*.xcuserstate
+
+### Xcode Patch
+
+*.xcodeproj/*
+!*.xcodeproj/project.pbxproj
+!*.xcodeproj/xcshareddata/
+!*.xcworkspace/contents.xcworkspacedata
+/*.gcno
+**/xcshareddata/WorkspaceSettings.xcsettings
+
+### AppCode
+
+.idea/*
+
+### fastlane
+
+fastlane/report.xml
+
+- .generated.swift
+*.xcuserstate
+*.zip
